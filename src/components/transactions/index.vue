@@ -1,36 +1,61 @@
 <template>
   <div>
-    <h3>Transactions</h3>
-    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-<div class="card-header">Total Income</div>
-  <div class="card-body ">
-    <p class="card bg-secondary " >0.00</p>
+    <body>
+      <div class="container">
+        <br>
+        <h2 class="text-center p-6">ACCOUNTS</h2>
+<br/>
+      <div v-for="account in accounts" v-bind:key="account.iban">
+   <div class="container text-center p-6">
+  <div class="row">
+    <div class="col ">
+       <button type="button" class="btn btn-primary " style="height:50px;width:500px" @click="goToAccount(JSON.parse(JSON.stringify(account)))">{{account.iban}}  €{{account.balance}} </button> 
+    </div>
+   
   </div>
     </div>
+    <br/>
+      </div>
+      </div>
+      
+   
+    </body>
+  
     
-
-</div>
-<div>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#depositModal">Deposit </button>
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#withdrawModal">Withdraw </button> 
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transactionModal">Transfer </button> 
-  <DepositModal></DepositModal>
-  <WithdrawModal></WithdrawModal>
-  <TransactionModal></TransactionModal>
   </div>
 </template>
 
 <script>
-import DepositModal from "../transactions/Modals/depositModal.vue"
-import WithdrawModal from "../transactions/Modals/withdrawModal.vue"
-import TransactionModal from "../transactions/Modals/transactionModal.vue"
+import axios from '../../axios-auth';
+import toastr from "toastr";
 export default {
 name:'transactionIndex',
+mounted(){
+  this.getUserAccounts();
+},
  components: { 
-  DepositModal ,
-  WithdrawModal,
-  TransactionModal
+
+},
+ data(){
+    return{
+      accounts:[]
+    }
+  },
+ methods: {
+      getUserAccounts(){
+        axios.get("/account/employee",axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
+         .then(result => (this.accounts = JSON.parse(JSON.stringify(result.data))))
+         //
+         .catch((error) => {
+        toastr.error('Something went wrong' + error)
+        });
+      
+      },
+      goToAccount(account){
+       this.$router.push({ path: '/transactions/'+ account.iban })
+      }
 }
+ 
 }
 </script>
 

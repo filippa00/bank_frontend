@@ -17,7 +17,8 @@ import accountInfo from "../components/Employees/accountInfoModal.vue"
 
 //Manage employees
 import manage from "../components/Employees/index.vue";
-import transaction from "../components/transactions/"
+import transaction from "../components/transactions/index.vue";
+import accountTransactions from "../components/transactions/accountTransactions.vue";
 
 
 
@@ -86,8 +87,12 @@ const routes = [
       component: transaction,
    
     },
-
-    //transaction endpoints 
+    {
+      path:"/transactions/:iban",
+      name:"accountTransactions",
+      component: accountTransactions,
+      props:true,
+    },
   
   ];
   

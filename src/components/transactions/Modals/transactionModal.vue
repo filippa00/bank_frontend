@@ -57,6 +57,20 @@
 <script>
 export default {
 name:'transactionModal',
+props:{
+    iban: String
+},
+data(){
+  return{
+    transferBody:{
+        accountTo: "",
+        accountFrom: this.iban,
+        amount: 0,
+        description: "",
+        executionDate: new Date().getDate(),
+    }
+  }
+},
 }
 </script>
 

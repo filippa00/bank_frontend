@@ -62,7 +62,7 @@ export default {
     methods: {
       
         login(){
-           this.$store.dispatch('login', {
+           this.$store.dispatch('login',{
                "username" : this.username,
               "password": this.password,
             })
