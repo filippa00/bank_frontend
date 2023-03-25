@@ -41,16 +41,14 @@
                       <th>amount</th>
                       <th>Account From</th>
                       <th>Account To</th>
-                      <th>Description</th>
                   </tr>
               </thead>
               <tbody v-for="transaction in transactions" v-bind:key="transaction.executionDate">
                   <tr>
                       <td>{{transaction.executionDate}}</td>
                       <td>{{transaction.amount}}</td>
-                      <td>{{transaction.accountTo}}</td>
                       <td>{{transaction.accountFrom}}</td>
-                      <td>{{transaction.description}}</td>
+                      <td>{{transaction.accountTo}}</td>
                   </tr>
               </tbody>
           </table>

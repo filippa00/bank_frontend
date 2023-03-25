@@ -1,7 +1,11 @@
 <template>
   
   <div class="container-fluid">
-
+<div v-if="username != null" class="card-header">
+  <h4>
+ Welcome {{username}}
+  </h4>
+  </div>
       <img class="banner" src="website-banner.png">
       <div class="card">
   <div class="card-header">
@@ -23,8 +27,10 @@
 
 export default {
     name:'mainIndex',
-    components: {
-
+    data(){
+      return{
+        username: localStorage.getItem("username")
+      }
   },
 }
 </script>

@@ -19,7 +19,7 @@ import accountInfo from "../components/Employees/accountInfoModal.vue"
 import manage from "../components/Employees/index.vue";
 import transaction from "../components/transactions/index.vue";
 import accountTransactions from "../components/transactions/accountTransactions.vue";
-
+import profile from "../components/Profile.vue/index.vue"
 
 
 
@@ -40,6 +40,11 @@ const routes = [
       path: "/register",
       name: "register",
       component: register
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: profile
     },
     {
       path: "/user/update",

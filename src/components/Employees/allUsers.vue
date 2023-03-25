@@ -4,7 +4,7 @@
       <div class="row">
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
-            <table id="myTable" class="display">
+            <table id="usersTable" class="display">
               <thead>
                   <tr>
                       <th>Nr.</th>
@@ -20,7 +20,9 @@
                       <td>{{user.firstname}}</td>
                       <td>{{user.lastname}}</td>
                       <td>{{user.username}}</td>
-                      <td><button class="btn btn-success btn-login text-uppercase fw-bold" type="button" data-toggle="modal" data-target="#exampleModal" @click="OpenAccount(user.id)" >Open an Account</button></td>
+                      <td><button class="btn btn-success btn-login text-uppercase fw-bold" type="button"  @click="OpenAccount(user.id)" >Open an Account</button>
+                      <!-- <button class="btn btn-warning btn-login text-uppercase fw-bold" type="button"  @click="UpdateAccount(user.id)" >Update Account</button> -->
+                    </td>
                   </tr>
               </tbody>
           </table>
@@ -36,12 +38,14 @@ import axios from '../../axios-auth';
 import $ from 'jquery';
 import toastr from "toastr";
 export default {
-name:'noAccounts',
+name: 'allUsers',
+components : {
+},
 created(){
     $.noConflict();
       $(document).ready(function () {
-    $('#myTable').DataTable({
-      "columnDefs": [ {
+    $('#usersTable').DataTable({
+        "columnDefs": [ {
       "targets": [ 4 ],
       "orderable": false
     } ]
@@ -50,7 +54,9 @@ created(){
   },
   data(){
     return{
-      users:[]
+      users:[],
+      id:0,
+      username: "",
     }
   },
   mounted() {
@@ -58,7 +64,7 @@ created(){
   },
   methods:{
       DisplayUsers(){
-        axios.get("/user/noAccount",axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
+        axios.get("/user",axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
          .then(result => this.users = result.data)
          .catch((error) => {
         toastr.error('Something went wrong' + error)
@@ -66,12 +72,14 @@ created(){
       },
       OpenAccount(id){
         this.$router.push({ path: '/account/'+id })
+      },
+      getUser(id,username){
+        this.id = id;
+        this.username = username;
       }
-      
   }
 
 }
-
 </script>
 
 <style>

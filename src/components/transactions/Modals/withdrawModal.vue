@@ -14,9 +14,19 @@
             <br/>
              <label>Enter an amount to withdraw:</label>
             <div class="input-group">
-            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+            <input type="text"
+             class="form-control" 
+            aria-label="Dollar amount (with dot and two decimal places)"
+            v-model="withdrawBody.amount">
             <span class="input-group-text">$</span>
             <span class="input-group-text">0.00</span>
+            </div>
+
+            <br>
+             <label>Please enter pin for {{this.iban}}</label>
+            <div class="input-group">
+            <input type="password" name="pin" maxlength="4"
+            v-model="withdrawBody.pincode">
             </div>
         </form>
       </div>
@@ -39,7 +49,6 @@ data(){
   return{
     withdrawBody:{
         amount: 0,
-        executionDate: new Date().getDate(),
         pincode: 0,
     }
   }
@@ -49,7 +58,7 @@ props:{
 },
 methods: {
       withdraw(){
-        axios.get("/transaction/" + this.iban + "/withdraw",this.withdrawBody,axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
+        axios.post("/transaction/" + this.iban + "/withdraw",this.withdrawBody,axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
          .then(result => (this.accounts = JSON.parse(JSON.stringify(result.data))))
          .catch((error) => {
         toastr.error('Something went wrong' + error)

@@ -20,51 +20,33 @@
                 >
             </li>
 
-         <!-- <li class="nav-item dropdown" >
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">transactions</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li>
-      </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">account</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li>
-      </ul>
-  </li> -->
-
     <li class="nav-item" v-show="this.isEmployee == 'true' && this.isLoggedIn" >
         <router-link to="/manage" class="nav-link" active-class="active"
             >manage</router-link
           >
       </li>
 
-
-   
-      <!-- <li class="nav-item">
-        <router-link to="/register" class="nav-link" active-class="active"
-            >Register</router-link
-          >
-      </li> -->
-     
-
       <li class="nav-item" v-show="!this.isLoggedIn">
        <router-link to="/login" class="nav-link" active-class="active"
             >Login</router-link
+          >
+      </li>
+      <li class="nav-item" v-show="!this.isLoggedIn">
+        <router-link to="/register" class="nav-link" active-class="active"
+            >Register</router-link
+          >
+      </li>
+
+      <li class="nav-item" v-show="this.isLoggedIn">
+       <router-link to="/profile" class="nav-link" active-class="active"
+            >profile</router-link
           >
       </li>
 
       <li class="nav-item" v-show="this.isLoggedIn">
        <a @click="logout()" class="nav-link" active-class="active">Logout</a>
       </li>
+
      
   </ul>
     
@@ -79,16 +61,36 @@ export default {
     data(){
       return {
       isEmployee : localStorage.getItem('employee'),
-      isLoggedIn : localStorage.getItem('token')
+      isLoggedIn : false,
+      user:"",
       }
     }, 
+    mounted(){
+      this.parseJwt();
+      if(this.user != null){
+        this.isLoggedIn = true
+      }
+    },
     methods:{
     logout(){
       localStorage.removeItem('token');
       localStorage.removeItem('employee');
       localStorage.removeItem('username')
       location.reload();
-    }
+    },
+     parseJwt () {
+    var base64Url = localStorage.getItem('token').split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+  var userArr = jsonPayload.split(',')
+  userArr = userArr[0].split(':');
+  this.user = userArr[1].replace(/"/g, "")
+  localStorage.setItem('username',this.user)
+},
+
     }
 }
 </script>

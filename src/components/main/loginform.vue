@@ -47,7 +47,9 @@
 </template>
 
 <script>
-import toastr from "toastr"
+import toastr from "toastr";
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 export default {
      name:'loginForm',
      components: {
@@ -55,30 +57,40 @@ export default {
   },
      data(){
         return{
+          v$: useVuelidate(),
           username:"",
           password:"",
         };
     },
+    validations(){
+       return{
+          username:{ required },
+          password: { required },
+        };
+
+    },
     methods: {
       
         login(){
-           this.$store.dispatch('login',{
+          this.v$.$validate()
+          if(!this.v$.error){
+              this.$store.dispatch('login',{
                "username" : this.username,
               "password": this.password,
             })
             .then(() => {  
-             // console.log(res)
-          //    ;
-          
-           location.reload();
-            toastr.success('Login successful')
-            //setTimeout(this.$router.push("/"), 700000)
-          //  
+              toastr.options.onHidden = function() {window.location.href = '/'}
+            toastr.success('Login successful'
+            ) 
          
         })
         .catch((error) => {
         toastr.error('Something went wrong' + error)
         });
+          }else{
+            toastr.error('Please fill in all fields' )
+          }
+           
         },
         register(){
           this.$router.replace('/register')
