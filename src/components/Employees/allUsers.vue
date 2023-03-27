@@ -21,7 +21,6 @@
                       <td>{{user.lastname}}</td>
                       <td>{{user.username}}</td>
                       <td><button class="btn btn-success btn-login text-uppercase fw-bold" type="button"  @click="OpenAccount(user.id)" >Open an Account</button>
-                      <!-- <button class="btn btn-warning btn-login text-uppercase fw-bold" type="button"  @click="UpdateAccount(user.id)" >Update Account</button> -->
                     </td>
                   </tr>
               </tbody>
@@ -41,16 +40,11 @@ export default {
 name: 'allUsers',
 components : {
 },
+setup(){
+  
+},
 created(){
-    $.noConflict();
-      $(document).ready(function () {
-    $('#usersTable').DataTable({
-        "columnDefs": [ {
-      "targets": [ 4 ],
-      "orderable": false
-    } ]
-    });
-    });
+  this.DisplayUsers();
   },
   data(){
     return{
@@ -60,7 +54,15 @@ created(){
     }
   },
   mounted() {
-  this.DisplayUsers();
+    $.noConflict();
+    $(document).ready(function () {
+    $('#usersTable').DataTable({
+        "columnDefs": [ {
+      "targets": [ 4 ],
+      "orderable": false
+    } ]
+    });
+    });
   },
   methods:{
       DisplayUsers(){

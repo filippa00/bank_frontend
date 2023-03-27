@@ -14,11 +14,16 @@
              <br/>
           <label>Enter a deposit amount:</label>
             <div class="input-group">
-            <input type="text" 
+            <input type="number" 
+  
+                        min="0.00"
+                        max="1000000.00"
+                        step="0.1"
+                        placeholder="€0.00"
             class="form-control" 
             aria-label="Dollar amount (with dot and two decimal places)"
             v-model="depositBody.amount">
-            <span class="input-group-text">$</span>
+            <span class="input-group-text">€</span>
             <span class="input-group-text">0.00</span>
             </div>
            
@@ -87,11 +92,19 @@ data(){
         pincode: 0,
     },
     currentIndex : 0,
-    loading: false
+    loading: false,
+    showNext:false,
   }
 },
 props:{
     iban: String
+},
+watch:{
+  // depositBody.amount(newValue){
+  //   if(newValue != null && newValue > 0 ){
+  //     console.log(newValue)
+  //   }
+  // }
 },
 methods: {
       deposit(){
