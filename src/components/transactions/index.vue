@@ -11,11 +11,21 @@
               <div class="col">
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-primary btn-xl"
                   style="height: 50px; width: 500px"
                   @click="goToAccount(JSON.parse(JSON.stringify(account)))"
                 >
-                  {{ account.iban }} €{{ account.balance }}
+                  <!-- {{ account.iban }} €{{ account.balance }} -->
+                <div class="row">
+                  <div class="col">
+                    <h6 class="text-left text-muted"  >{{ this.user }}</h6>
+                    <h6 class="text-left" style="margin-top:-5px">{{ account.iban }}</h6>
+                  </div>
+                  <div class="col">
+                      €{{ account.balance }}
+                  
+                  </div>
+                </div>
                 </button>
               </div>
             </div>
@@ -38,6 +48,7 @@ export default {
   components: {},
   data() {
     return {
+      user : localStorage.getItem('username'),
       accounts: [],
     };
   },

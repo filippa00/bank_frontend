@@ -12,13 +12,13 @@
         <form>
                  <!-- amount -->
              <br/>
-          <label>Enter a deposit amount:</label>
+          <label>Enter a deposit amount:<span class="text-danger">*</span></label>
             <div class="input-group">
             <input type="number" 
   
                         min="0.00"
                         max="1000000.00"
-                        step="0.1"
+                        step="0.01"
                         placeholder="€0.00"
             class="form-control" 
             aria-label="Dollar amount (with dot and two decimal places)"
@@ -30,8 +30,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" @click="this.currentIndex = 1">next </button> 
+        <div v-if="showNext">
+        <button type="button" class="btn btn-primary" @click="this.currentIndex = 1">Next </button> 
+        </div>
+        <div v-else>
+          <button type="button" class="btn btn-primary disabled" @click="this.currentIndex = 1">Next </button> 
+        </div>
         <!-- make sure ony 4 digits can be typed pincode-->
  
       </div>
@@ -39,12 +43,7 @@
     
      <div class="modal-content" v-show="currentIndex == 1 " 
      > 
-     <div v-if="loading" >
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-    <div v-else>
+    
        <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Deposit into {{this.iban}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -53,16 +52,23 @@
         <form>
                  <!-- amount -->
                   <label>Please enter pin for {{this.iban}}</label>
-            <div class="input-group">
+            <!-- <div class="input-group">
             <input type="password" name="pin" maxlength="4"
             v-model="depositBody.pincode">
 
-            </div>
-             
+            </div> -->
         </form>
-      </div>
+
+        <!-- <div class="input-wrapper">
+  <PincodeInput
+    v-model="code"
+    placeholder="0"
+  />
+</div> -->
+   
       <div class="modal-footer" v-show="currentIndex == 1">
-         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+           <button type="button" class="btn btn-secondary" @click="this.currentIndex = 0">Back </button> 
         <button type="button" class="btn btn-primary" @click="deposit(), this.currentIndex = 0">Deposit </button> 
         <!-- make sure ony 4 digits can be typed pincode-->
  
@@ -79,11 +85,11 @@
 <script>
 import axios from '../../../axios-auth';
 import toastr from "toastr";
-
+//import {PincodeInput} from 'vue-pincode-input';
 export default {
 name:'depositModal',
 components:{
- 
+ //PincodeInput
 },
 data(){
   return{
@@ -92,20 +98,26 @@ data(){
         pincode: 0,
     },
     currentIndex : 0,
-    loading: false,
     showNext:false,
+    showDeposit:false,
   }
 },
 props:{
     iban: String
 },
-watch:{
-  // depositBody.amount(newValue){
-  //   if(newValue != null && newValue > 0 ){
-  //     console.log(newValue)
-  //   }
-  // }
-},
+  watch: {
+    depositBody: {
+      handler(newValue) {
+        if(newValue.amount > 0){
+          this.showNext = true
+        }else{
+          this.showNext = false
+        }
+      },
+      deep: true
+    }
+  },
+
 methods: {
       deposit(){
         if(this.loading == true){return}
