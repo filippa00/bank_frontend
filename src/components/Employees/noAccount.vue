@@ -4,7 +4,7 @@
       <div class="row">
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
-            <table id="myTable" class="display">
+            <table id="myTable" class="table">
               <thead>
                   <tr>
                       <th>Nr.</th>
@@ -33,21 +33,9 @@
 
 <script>
 import axios from '../../axios-auth';
-import $ from 'jquery';
 import toastr from "toastr";
 export default {
 name:'noAccounts',
-created(){
-    $.noConflict();
-      $(document).ready(function () {
-    $('#myTable').DataTable({
-      "columnDefs": [ {
-      "targets": [ 4 ],
-      "orderable": false
-    } ]
-    });
-    });
-  },
   data(){
     return{
       users:[]

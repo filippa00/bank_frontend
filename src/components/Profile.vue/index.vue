@@ -62,6 +62,9 @@ export default {
 name:'profileIndex',
 mounted(){
 this.DisplayUser();
+setTimeout(()=>{
+     window.location.href = "/";
+      },600000);
 },
 data(){
     return{

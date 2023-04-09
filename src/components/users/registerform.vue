@@ -193,6 +193,11 @@ export default {
       },
     };
   },
+  mounted(){
+      setTimeout(()=>{
+     window.location.href = "/";
+      },900000);
+  },
   methods: {
     Register() {
       this.v$.$validate();
@@ -201,15 +206,18 @@ export default {
           .post(
             "/user/",
             this.customer,
-            (axios.defaults.headers.common[
-              "Authorization"
-            ] = `Bearer ${localStorage.getItem("token")}`)
           )
 
           .then(function () {
+             toastr.options.onHidden = function () {
+              window.location.href = "/";
+            };
             toastr.success("Successfully resgistered new user");
           })
           .catch(() => {
+             toastr.options.onHidden = function () {
+              window.location.reload();
+            };
             toastr.error("Something went wrong, the username already exists");
           });
       } else {

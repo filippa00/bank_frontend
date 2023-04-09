@@ -4,14 +4,7 @@
       <div class="row">
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
-              <DataTable
-   :columns="this.columns"
-    ajax="/user"
-    class="display"
-    width="100%"
-   ref="table"
-              >
-            
+              <table id="table" class="table">
               <thead>
                   <tr>
                       <th>Nr.</th>
@@ -21,6 +14,7 @@
                       <th></th>
                   </tr>
               </thead>
+              <tbody v-for="user in users" v-bind:key="user.id">
                   <tr>
                       <td>{{user.id}}</td>
                       <td>{{user.firstname}}</td>
@@ -29,7 +23,9 @@
                       <td><button class="btn btn-success btn-login text-uppercase fw-bold" type="button"  @click="OpenAccount(user.id)" >Open an Account</button>
                     </td>
                   </tr>
-              </DataTable>
+              </tbody>
+              </table>
+          
               
           </div>
         </div>
@@ -41,52 +37,24 @@
 <script>
 
 import axios from '../../axios-auth';
-import $ from 'jquery';
 import toastr from "toastr";
-import DataTable from 'datatables.net';
-
-//import accountSearchDatatable from '../transactions/Modals/accountSearchDatatable.vue';
-// const 
-
 export default 
  {
 name: 'allUsers',
 components : {
-  DataTable
-},
-setup(){
   
 },
-created(){
-  this.DisplayUsers();
-  
-
-
-  },
   data(){
     return{
       users:[],
       id:0,
       username: "",
-      columns : [
-        {data: 'id'},
-        {data: 'firstname'},
-        {data: 'lastname'},
-        {data: 'username'},
-        {data: 'butons'}
-      ]
+  
     }
   },
   mounted() {
-    $.noConflict();
-    $(document).ready(function () {
-    $('#usersTable').DataTable({
-        "columnDefs": [ {
-      "targets": [ 4 ],
-      "orderable": false
-    } ]
-    });
-    });
+   this.DisplayUsers();
+    
   },
   methods:{
       DisplayUsers(){

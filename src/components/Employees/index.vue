@@ -46,6 +46,11 @@ export default {
     currentIndex : 0,
     }
   },
+  mounted(){
+    setTimeout(()=>{
+     window.location.href = "/";
+      },600000);
+  },
   methods:{
     clicked(number){
         if (!this.currentIndex == number){

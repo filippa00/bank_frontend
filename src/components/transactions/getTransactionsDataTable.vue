@@ -40,10 +40,6 @@
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col">
@@ -66,10 +62,6 @@
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col">
@@ -95,10 +87,6 @@
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
               </div>
@@ -110,46 +98,40 @@
                   >
                     <div class="col-auto">
                       <label for="inputIbanFrom" class="col-form-label"
-                        >IBAN From</label
+                        >IBAN From:</label
                       >
                     </div>
                     <div class="col-auto">
                       <input
                         type="text"
                         id="inputIbanFrom"
+                        maxlength="20"
                         placeholder="NL 99 BANK 0123 4567 89"
                         class="form-control"
                         v-model="searchTransactions.inputIbanFrom"
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col">
                   <div class="row g-3 align-items-center">
                     <div class="col-auto">
                       <label for="inputIbanTo" class="col-form-label"
-                        >IBAN To</label
+                        >IBAN To:</label
                       >
                     </div>
                     <div class="col-auto">
                       <input
                         type="text"
                         id="inputIbanTo"
+                        maxlength="20"
                         placeholder="NL 99 BANK 0123 4567 89"
                         class="form-control"
                         v-model="searchTransactions.inputIbanTo"
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col">
@@ -173,10 +155,6 @@
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col">
@@ -232,8 +210,14 @@
           v-for="transaction in transactions"
           v-bind:key="transaction.executionDate"
         >
-          <tr>
-            <td>{{this.formatDate(transaction.executionDate)}}</td>
+          <tr v-if="transaction.accountTo == this.iban" class="table-success">
+            <td>{{ formatDate(transaction.executionDate)  }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.accountFrom }}</td>
+            <td>{{ transaction.accountTo }}</td>
+          </tr>
+          <tr v-else>
+            <td>{{ formatDate(transaction.executionDate)  }}</td>
             <td>{{ transaction.amount }}</td>
             <td>{{ transaction.accountFrom }}</td>
             <td>{{ transaction.accountTo }}</td>
@@ -259,11 +243,6 @@ export default {
   data() {
     return {
       transactions: [],
-      // transactionKey: "",
-      // transactionKey2: "",
-      // inputParameter: "",
-      // inputParameter2: "",
-
       searchTransactions: {
         inputDateFrom: null,
         inputDateTo: null,
@@ -276,19 +255,7 @@ export default {
     };
   },
   methods: {
-    // getTransactions(){
-    //   axios.get("/transaction/"+ this.iban,axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`)
-    //  .then(result => this.transactions = result.data)
-    // .catch((error) => {
-    //   toastr.error('Something went wrong' + error)
-    //   });
-    // },
     findTransactions() {
-      // console.log(this.searchTransactions.inputDateFrom)
-      // const params = new URLSearchParams();
-      // params.set(this.transactionKey, this.inputParameter);
-      // params.set(this.transactionKey2, this.inputParameter2);
-
       const params = this.getQueryParams();
       console.log(params);
       axios
@@ -306,7 +273,10 @@ export default {
     },
     getQueryParams() {
       const params = new URLSearchParams();
-      if (this.searchTransactions.inputDateFrom != null && this.searchTransactions.inputDateFrom != "Invalid date") {
+      if (
+        this.searchTransactions.inputDateFrom != null &&
+        this.searchTransactions.inputDateFrom != "Invalid date"
+      ) {
         params.set(
           "dateFrom",
           moment(String(this.searchTransactions.inputDateFrom)).format(
@@ -314,7 +284,10 @@ export default {
           )
         );
       }
-      if (this.searchTransactions.inputDateTo != null && this.searchTransactions.inputDateTo != "Invalid date") {
+      if (
+        this.searchTransactions.inputDateTo != null &&
+        this.searchTransactions.inputDateTo != "Invalid date"
+      ) {
         params.set(
           "dateTo",
           moment(String(this.searchTransactions.inputDateTo)).format(
@@ -339,11 +312,9 @@ export default {
       }
       return params;
     },
-    formatDate(date){
- return moment(String(date)).format(
-            "DD-MM-YYYY hh:mm"
-          )
-    }
+    formatDate(date) {
+      return moment(String(date)).format("DD-MM-YYYY hh:mm");
+    },
   },
 };
 </script>

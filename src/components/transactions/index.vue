@@ -44,6 +44,9 @@ export default {
   name: "transactionIndex",
   mounted() {
     this.getUserAccounts();
+    setTimeout(()=>{
+     window.location.href = "/";
+      },600000);
   },
   components: {},
   data() {

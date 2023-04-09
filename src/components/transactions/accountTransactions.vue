@@ -95,7 +95,9 @@ export default {
   },
   mounted() {
     this.getUserAccounts();
-    console.log(this.iban);
+      setTimeout(()=>{
+     window.location.href = "/";
+      },600000);
   },
   props: {
     iban: String,

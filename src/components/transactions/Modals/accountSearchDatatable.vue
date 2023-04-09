@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     searchName() {
+      this.ibans = [];
       const params = new URLSearchParams();
       params.set("lastName", this.lastname);
       if (this.firstname != "") {

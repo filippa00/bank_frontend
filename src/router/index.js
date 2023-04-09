@@ -5,21 +5,21 @@ import login from "../components/main/login.vue";
 
 //users endpoints 
 import register from "../components/users/register.vue";
-import updateUser from "../components/users/updateUser.vue";
-import totalBalance from "../components/users/totalBalance.vue";
 import noAccount from "../components/Employees/noAccount.vue";
-import getUsers from "../components/users/getUsers.vue";
+import profile from "../components/Profile.vue/index.vue";
 
-//account endpoints 
+//account 
 import createAccount from "../components/Employees/createAccount.vue";
-import accountInfo from "../components/Employees/accountInfoModal.vue"
+import accountInfo from "../components/Employees/accountInfoModal.vue";
+
 //transaction endpoints 
+import transaction from "../components/transactions/index.vue";
+import accountTransactions from "../components/transactions/accountTransactions.vue";
 
 //Manage employees
 import manage from "../components/Employees/index.vue";
-import transaction from "../components/transactions/index.vue";
-import accountTransactions from "../components/transactions/accountTransactions.vue";
-import profile from "../components/Profile.vue/index.vue"
+//import axios from "../axios-auth";
+
 
 
 
@@ -47,24 +47,9 @@ const routes = [
       component: profile
     },
     {
-      path: "/user/update",
-      name: "updateUser",
-      component: updateUser
-    },
-    {
-      path: "/user/totalbalance",
-      name: "totalBalance",
-      component: totalBalance
-    },
-    {
       path: "/user/noaccount",
       name: "noAccount",
       component: noAccount
-    },
-    {
-      path: "/users",
-      name: "getUsers",
-      component: getUsers
     },
     //manage endpoints 
     {
@@ -112,7 +97,34 @@ const routes = [
         return'/login';
       }else if(to.name == 'manage' && localStorage.getItem('employee') != 'true'){
         return'/login';
-      }
+      // } else if (to.name == 'accountTransactions') {
+      //   //var yourAccount = true;
+      //   axios
+      //   .get(
+      //     "/account/employee",
+      //     (axios.defaults.headers.common[
+      //       "Authorization"
+      //     ] = `Bearer ${localStorage.getItem("token")}`)
+      //   )
+      //   .then((result) => {
+      //     result.data.forEach((account) => {
+           
+      //       if (!to.path.includes(account.iban)) {
+      //         console.log("false")
+      //         //yourAccount = false
+              
+      //         return window.location.href = "/"
+      //      }
+      //     });
+      //     // if (yourAccount == false) {
+      //     //   return'/transactions';
+      //     // }
+      //   })
+      //   // if (yourAccount == false) {
+      //   //   return'/transactions';
+      //   // }
+      
+       }
     }                                                                                                                                                                                                                                  
   })
   

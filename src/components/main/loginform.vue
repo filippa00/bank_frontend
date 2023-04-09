@@ -84,6 +84,11 @@ export default {
       password: { required },
     };
   },
+  mounted(){
+ setTimeout(()=>{
+     window.location.href = "/";
+      },900000);
+  },
   methods: {
     login() {
       this.v$.$validate();

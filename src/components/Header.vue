@@ -70,6 +70,10 @@ export default {
       if(this.user != null){
         this.isLoggedIn = true
       }
+        setTimeout(()=>{
+       this.checkToken()
+      },600000);
+
     },
     methods:{
     logout(){
@@ -90,6 +94,12 @@ export default {
   this.user = userArr[1].replace(/"/g, "")
   localStorage.setItem('username',this.user)
 },
+checkToken(){
+  this.parseJwt()
+  if (this.user == null || this.user == "" && this.isLoggedIn == false){
+    this.logout();
+  }
+}
 
     }
 }
