@@ -22,7 +22,7 @@
 
     <li class="nav-item" v-show="this.isEmployee == 'true' && this.isLoggedIn" >
         <router-link to="/manage" class="nav-link" active-class="active"
-            >manage</router-link
+            >Manage</router-link
           >
       </li>
 
@@ -39,7 +39,7 @@
 
       <li class="nav-item" v-show="this.isLoggedIn">
        <router-link to="/profile" class="nav-link" active-class="active"
-            >profile</router-link
+            >Profile</router-link
           >
       </li>
 

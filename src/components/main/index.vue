@@ -5,33 +5,38 @@
   <h2>
  Welcome {{username}}
   </h2>
-  <div class="container text-center">
-  <div class="row justify-content-md-center">
-    <div class="col text-primary" >
-    <img
+    <!-- <img
               class="banner b"
               src="transaction.svg"
               width="20px"
               height="20px"
             
-            />
-     <a href="/transactions">Transactions</a>
+            /> -->
+  <div class="container text-center">
+  <div class="row justify-content-md-center">
+    <div class="col text-primary" >
+     <router-link to="/transactions" class="nav-link" active-class="active"
+            >Transactions</router-link
+          >
     </div>
-     
-    <div class="col text-primary">
-   
-
-      <img
+      <!-- <img
               class="banner b"
               src="user.svg"
               width="15px"
               height="15px"
             
-            />
-   <a href="/profile">Profile</a>
+            /> -->
+    <div class="col text-primary">
+   
+  
+
+    
         
-    </div>
+    <router-link to="/profile" class="nav-link" active-class="active"
+            >Profile</router-link
+          >
   </div>
+    </div>
 </div>
   </div>
       <img class="banner" src="website-banner.png">
