@@ -18,10 +18,10 @@ const store = createStore({
         }
 
     },
-    //https://cgbank-production.up.railway.app:443/login
+    //http://localhost:8080/login
     actions: {
         login({ commit }, parameters) {
-            return new Promise((resolve, reject) => { axios.post("http://localhost:8080/login", {
+            return new Promise((resolve, reject) => { axios.post("https://cgbank-production.up.railway.app:443/login", {
                     "username": parameters.username,
                     "password": parameters.password,
                 })
@@ -29,18 +29,7 @@ const store = createStore({
                     axios.defaults.headers.common["Authorization"] = "Bearer " + result.data.token;
                     localStorage.setItem('token', result.data.token);
                     localStorage.setItem('employee', result.data.employee);
-                    // localStorage.setItem('expires_at', result.data.expires_at)
-                    // localStorage.setItem('userID', result.data.userID)
-                    // localStorage.setItem('roles', result.data.roles)
                     commit('authenticateUser', result.data);
-                    //{
-                        // JWTtoken:result.data.JWTtoken,
-                        // employee:result.data.employee
-                        // token_type: result.data.token_type,
-                        // expires_at: result.data.expires_at,
-                        // userId:result.data.userId,
-                        // roles: result.data.roles
-                    //});
                     resolve()
                     })
                 .catch((error) => {
