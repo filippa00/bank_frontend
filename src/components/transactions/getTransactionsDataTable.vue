@@ -151,7 +151,7 @@
                         type="datetime-local"
                         id="inputDateFrom"
                         class="form-control"
-                        min="2000-01-01T00:00" max="2022-06-30T00:00"
+                        min="2000-01-01T00:00" max="2023-06-30T00:00"
                         v-model="searchTransactions.inputDateFrom"
                       />
                     </div>

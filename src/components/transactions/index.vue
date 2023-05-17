@@ -17,7 +17,7 @@
                 >
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-left text-muted"  >{{ this.user }}</h6>
+                    <h6 class="text-left text-muted" >{{account.type}} </h6>
                     <h6 class="text-left" style="margin-top:-5px">{{ account.iban }}</h6>
                   </div>
                   <div class="col">

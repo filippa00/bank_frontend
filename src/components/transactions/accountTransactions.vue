@@ -7,8 +7,8 @@
             <div class="card-header">
               <div class="row">
                 <div class="col">
-                  <h3 class="text-left">{{ user }}</h3>
-                  <h5 class="text-left text-muted">{{ this.iban }}</h5>
+                  <h3 class="text-left">{{this.account.type}}</h3>
+                  <h5 class="text-left text-muted">{{ this.iban }} </h5>
                 </div>
                 <div class="col">
                   <br />
