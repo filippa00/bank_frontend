@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="card border-0 shadow rounded-3 my-5">
-          <div class="card-body p-4 p-sm-5">
+          <div class="card-body p-4 p-sm-5 table-responsive">
               <table id="table" class="table">
               <thead>
                   <tr>

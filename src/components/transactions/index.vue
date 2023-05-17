@@ -6,16 +6,15 @@
         <h2 class="text-center p-6">ACCOUNTS</h2>
         <br />
         <div v-for="account in accounts" v-bind:key="account.iban">
-          <div class="container text-center p-6">
+          <div class="container text-center p-6" id="btn-container">
             <div class="row">
               <div class="col">
                 <button
                   type="button"
                   class="btn btn-primary btn-xl"
-                  style="height: 50px; width: 500px"
+                  
                   @click="goToAccount(JSON.parse(JSON.stringify(account)))"
                 >
-                  <!-- {{ account.iban }} €{{ account.balance }} -->
                 <div class="row">
                   <div class="col">
                     <h6 class="text-left text-muted"  >{{ this.user }}</h6>
@@ -79,4 +78,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+@media screen and (min-width: 500px) {
+  button {
+    height: 50px;
+    width: 500px;
+   
+  }
+}
+
+</style>
+

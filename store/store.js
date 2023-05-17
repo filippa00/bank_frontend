@@ -18,9 +18,10 @@ const store = createStore({
         }
 
     },
+    //https://cgbank-production.up.railway.app:443/login
     actions: {
         login({ commit }, parameters) {
-            return new Promise((resolve, reject) => { axios.post("https://cgbank-production.up.railway.app:443/login", {
+            return new Promise((resolve, reject) => { axios.post("http://localhost:8080/login", {
                     "username": parameters.username,
                     "password": parameters.password,
                 })

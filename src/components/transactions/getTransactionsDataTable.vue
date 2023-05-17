@@ -151,6 +151,7 @@
                         type="datetime-local"
                         id="inputDateFrom"
                         class="form-control"
+                        min="2000-01-01T00:00" max="2022-06-30T00:00"
                         v-model="searchTransactions.inputDateFrom"
                       />
                     </div>
@@ -169,14 +170,11 @@
                         type="datetime-local"
                         id="inputDateFrom"
                         class="form-control"
+                         min="2000-01-01T00:00" max="2027-12-31T00:00"
                         v-model="searchTransactions.inputDateTo"
                       />
                     </div>
                     <div class="col-auto"></div>
-
-                    <!-- <span class="text-danger" v-if="v$.username.$error">
-                      {{ v$.username.$errors[0].$message }}
-                    </span> -->
                   </div>
                 </div>
                 <div class="col"></div>
@@ -196,7 +194,7 @@
         </div>
       </div>
     </div>
-    <div class="card card-footer">
+    <div class="card card-footer table-responsive">
       <table id="transactionsTable" class="table table-hover">
         <thead class="table-secondary">
           <tr>
@@ -291,7 +289,7 @@ export default {
         params.set(
           "dateTo",
           moment(String(this.searchTransactions.inputDateTo)).format(
-            "DD/MM/YYYYThh:mm:ss"
+            "DD/MM/YYYYTHH:mm:ss"
           )
         );
       }
@@ -313,7 +311,7 @@ export default {
       return params;
     },
     formatDate(date) {
-      return moment(String(date)).format("DD-MM-YYYY hh:mm");
+      return moment(String(date)).format("DD-MM-YYYY HH:mm");
     },
   },
 };
