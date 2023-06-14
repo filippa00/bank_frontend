@@ -66,7 +66,7 @@ export default {
       }
     }, 
     mounted(){
-      if(this.user != null){
+      if(this.user != null && this.user != ""){
         this.parseJwt();
         this.isLoggedIn = true
       }
