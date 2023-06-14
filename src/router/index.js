@@ -97,33 +97,6 @@ const routes = [
         return'/login';
       }else if(to.name == 'manage' && localStorage.getItem('employee') != 'true'){
         return'/login';
-      // } else if (to.name == 'accountTransactions') {
-      //   //var yourAccount = true;
-      //   axios
-      //   .get(
-      //     "/account/employee",
-      //     (axios.defaults.headers.common[
-      //       "Authorization"
-      //     ] = `Bearer ${localStorage.getItem("token")}`)
-      //   )
-      //   .then((result) => {
-      //     result.data.forEach((account) => {
-           
-      //       if (!to.path.includes(account.iban)) {
-      //         console.log("false")
-      //         //yourAccount = false
-              
-      //         return window.location.href = "/"
-      //      }
-      //     });
-      //     // if (yourAccount == false) {
-      //     //   return'/transactions';
-      //     // }
-      //   })
-      //   // if (yourAccount == false) {
-      //   //   return'/transactions';
-      //   // }
-      
        }
     }                                                                                                                                                                                                                                  
   })

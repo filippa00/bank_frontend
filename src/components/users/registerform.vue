@@ -207,7 +207,6 @@ export default {
             "/user",
             this.customer,
           )
-
           .then(function () {
              toastr.options.onHidden = function () {
               window.location.href = "/";
