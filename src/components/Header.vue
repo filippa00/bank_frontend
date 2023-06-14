@@ -66,8 +66,8 @@ export default {
       }
     }, 
     mounted(){
-      this.parseJwt();
       if(this.user != null){
+        this.parseJwt();
         this.isLoggedIn = true
       }
         setTimeout(()=>{
