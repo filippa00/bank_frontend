@@ -66,8 +66,8 @@ export default {
       }
     }, 
     mounted(){
-      if(this.user != null && this.user != ""){
-        this.parseJwt();
+      this.parseJwt();
+      if(this.user != null){
         this.isLoggedIn = true
       }
         setTimeout(()=>{
@@ -83,7 +83,6 @@ export default {
       location.reload();
     },
      parseJwt () {
-        if(this.user != null){
     var base64Url = localStorage.getItem('token').split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
@@ -94,7 +93,6 @@ export default {
   userArr = userArr[0].split(':');
   this.user = userArr[1].replace(/"/g, "")
   localStorage.setItem('username',this.user)
-  }
 },
 checkToken(){
   this.parseJwt()
