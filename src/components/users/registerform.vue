@@ -177,6 +177,7 @@ export default {
         phone: "",
         password: "",
         username: "",
+        role : "ROLE_CUSTOMER"
       },
     };
   },
