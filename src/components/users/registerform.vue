@@ -204,7 +204,7 @@ export default {
       if (!this.v$.$invalid) {
         axios
           .post(
-            "/user/",
+            "/user",
             this.customer,
           )
 

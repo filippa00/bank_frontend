@@ -10,6 +10,7 @@
                 <form>
                   <div class="form-floating mb-3">
                     <input
+                    required
                       type="text"
                       maxlength="10"
                       class="form-control"
@@ -26,6 +27,7 @@
                   </div>
                   <div class="form-floating mb-3">
                     <input
+                    required
                       maxlength="15"
                       type="password"
                       class="form-control"
